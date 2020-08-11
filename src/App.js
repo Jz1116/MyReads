@@ -1,5 +1,4 @@
 import React from "react";
-// import * as BooksAPI from './BooksAPI'
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import SearchPage from "./components/SearchPage/SearchPage";
