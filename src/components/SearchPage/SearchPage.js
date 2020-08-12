@@ -13,11 +13,13 @@ class SearchPage extends Component {
     };
   }
 
-  handleSearchChange = (event) => {
+  handleSearchChange = async (event) => {
+    const searchInput = event.target.value;
     this.setState({
-      searchInput: event.target.value,
+      searchInput,
     });
-    this.queryBooks();
+
+    await this.queryBooks(event.target.value);
   };
 
   handleBookSelection = async (event, book) => {
@@ -26,15 +28,20 @@ class SearchPage extends Component {
     await addBookToShelf(book, event.target.value);
   };
 
-  queryBooks = async () => {
-    const { searchInput } = this.state;
+  queryBooks = async (searchInput) => {
     try {
       const books = await BooksAPI.search(searchInput);
       if (books !== undefined) {
         this.setSearchData(books);
+      } else {
+        this.setState({
+          searchData: [],
+        });
       }
     } catch (e) {
-      console.log(e.message);
+      this.setState({
+        searchData: [],
+      });
     }
   };
 
@@ -77,6 +84,7 @@ class SearchPage extends Component {
 
   render() {
     const { searchInput, searchData } = this.state;
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -88,7 +96,7 @@ class SearchPage extends Component {
               type="text"
               placeholder="Search by title or author"
               value={searchInput}
-              onChange={this.handleSearchChange}
+              onChange={async (event) => this.handleSearchChange(event)}
             />
           </div>
         </div>
