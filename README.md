@@ -10,6 +10,12 @@ Thank you Udacity for providing the starter template, which can be found in http
 
 Based on the starter template, a lot of features are added into this final version, which can be mainly found in [src](https://github.com/Jz1116/MyReads-Project/tree/master/src) file.
 
+Features added into this project:
+* Move books across different shelves on the Main Page
+* Delete books on the shelf
+* Search for books in the Search Page
+* Add books from the Search Page
+
 
 
 
