@@ -16,6 +16,27 @@ Features added into this project:
 * Search for books in the Search Page
 * Add books from the Search Page
 
+## Get Started
+First clone the project into your local repository
+```
+git clone https://github.com/Jz1116/MyReads-Project.git
+```
+
+Then go into the project folder
+```
+cd MyReads
+```
+
+After that, install the necessary dependencies for the project
+```
+npm install
+```
+
+Finally, start the project 
+```
+npm start
+```
+And you can find the project at http://localhost:3000/
 
 
 
