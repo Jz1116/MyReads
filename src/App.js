@@ -59,6 +59,26 @@ class BooksApp extends React.Component {
     });
   };
 
+  addBookToShelf = async (book, shelf) => {
+    const { booksOnShelf } = this.state;
+
+    await BooksAPI.update({ id: book.id }, shelf);
+
+    const newBook = {
+      id: book.id,
+      title: book.title,
+      author: book.author,
+      thumbnail: book.thumbnail,
+      shelf,
+    };
+
+    booksOnShelf.push(newBook);
+
+    this.setState({
+      booksOnShelf,
+    });
+  };
+
   render() {
     const { booksOnShelf } = this.state;
 
@@ -66,7 +86,10 @@ class BooksApp extends React.Component {
       <div className="app">
         <Switch>
           <Route path="/search">
-            <SearchPage booksOnShelf={booksOnShelf} />
+            <SearchPage
+              booksOnShelf={booksOnShelf}
+              addBookToShelf={this.addBookToShelf}
+            />
           </Route>
           <Route path="/">
             <MainPage

@@ -13,11 +13,17 @@ class SearchPage extends Component {
     };
   }
 
-  handleChange = (event) => {
+  handleSearchChange = (event) => {
     this.setState({
       searchInput: event.target.value,
     });
     this.queryBooks();
+  };
+
+  handleBookSelection = async (event, book) => {
+    const { addBookToShelf } = this.props;
+
+    await addBookToShelf(book, event.target.value);
   };
 
   queryBooks = async () => {
@@ -82,7 +88,7 @@ class SearchPage extends Component {
               type="text"
               placeholder="Search by title or author"
               value={searchInput}
-              onChange={this.handleChange}
+              onChange={this.handleSearchChange}
             />
           </div>
         </div>
@@ -102,7 +108,12 @@ class SearchPage extends Component {
                         }}
                       />
                       <div className="book-shelf-changer">
-                        <select value={book.shelf}>
+                        <select
+                          value={book.shelf}
+                          onChange={async (event) =>
+                            this.handleBookSelection(event, book)
+                          }
+                        >
                           <option value="move" disabled>
                             Move to...
                           </option>
