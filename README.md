@@ -6,6 +6,8 @@ and categorize books he/she has read, is currently reading, or want to read. The
 application and provides an API server and client library that the user will use to persist information as he/she interacts
 with the application. 
 
+Thank you Udacity for providing the starter template, which can be found in https://github.com/udacity/reactnd-project-myreads-starter
+
 
 
 
