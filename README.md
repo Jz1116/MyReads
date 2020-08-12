@@ -8,6 +8,8 @@ with the application.
 
 Thank you Udacity for providing the starter template, which can be found in https://github.com/udacity/reactnd-project-myreads-starter
 
+Based on the starter template, a lot of features are added into this final version, which can be mainly found in [src](https://github.com/Jz1116/MyReads-Project/tree/master/src) file.
+
 
 
 
