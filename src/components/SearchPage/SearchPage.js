@@ -33,15 +33,32 @@ class SearchPage extends Component {
   };
 
   setSearchData = (books) => {
+    const { booksOnShelf } = this.props;
+
     const data = books.map((book) => {
       let authors = book.authors;
+
+      const sameBook = booksOnShelf.find(
+        (bookOnShelf) => bookOnShelf.id === book.id
+      );
+
+      let shelf;
+
+      if (sameBook === undefined) {
+        shelf = "none";
+      } else {
+        shelf = sameBook.shelf;
+      }
 
       if (authors !== undefined) {
         authors = authors.join(", ");
       }
+
       return {
         title: book.title,
         author: authors,
+        id: book.id,
+        shelf,
         thumbnail:
           book.imageLinks === undefined ? undefined : book.imageLinks.thumbnail,
       };
@@ -85,7 +102,7 @@ class SearchPage extends Component {
                         }}
                       />
                       <div className="book-shelf-changer">
-                        <select>
+                        <select value={book.shelf}>
                           <option value="move" disabled>
                             Move to...
                           </option>

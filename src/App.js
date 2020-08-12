@@ -53,7 +53,7 @@ class BooksApp extends React.Component {
       <div className="app">
         <Switch>
           <Route path="/search">
-            <SearchPage />
+            <SearchPage booksOnShelf={booksOnShelf} />
           </Route>
           <Route path="/">
             <MainPage
