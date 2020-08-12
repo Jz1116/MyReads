@@ -35,11 +35,8 @@ class BooksApp extends React.Component {
     await BooksAPI.update({ id }, shelf);
     const { booksOnShelf } = this.state;
 
-    booksOnShelf.forEach((book) => {
-      if (book.id === id) {
-        book.shelf = shelf;
-      }
-    });
+    const bookIndex = booksOnShelf.findIndex((book) => book.id === id);
+    booksOnShelf[bookIndex].shelf = shelf;
 
     this.setState({
       booksOnShelf,
@@ -61,18 +58,25 @@ class BooksApp extends React.Component {
 
   addBookToShelf = async (book, shelf) => {
     const { booksOnShelf } = this.state;
-
     await BooksAPI.update({ id: book.id }, shelf);
 
-    const newBook = {
-      id: book.id,
-      title: book.title,
-      author: book.author,
-      thumbnail: book.thumbnail,
-      shelf,
-    };
+    const bookIndex = booksOnShelf.findIndex(
+      (bookOnShelf) => book.id === bookOnShelf.id
+    );
 
-    booksOnShelf.push(newBook);
+    if (bookIndex === -1) {
+      const newBook = {
+        id: book.id,
+        title: book.title,
+        author: book.author,
+        thumbnail: book.thumbnail,
+        shelf,
+      };
+
+      booksOnShelf.push(newBook);
+    } else {
+      booksOnShelf[bookIndex].shelf = shelf;
+    }
 
     this.setState({
       booksOnShelf,
