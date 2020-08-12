@@ -2,8 +2,13 @@ import React, { Component } from "react";
 
 class Read extends Component {
   handleChange = async (event, bookId) => {
-    const { updateBookData } = this.props;
-    await updateBookData(bookId, event.target.value);
+    const { updateBookData, deleteBookOnShelf } = this.props;
+
+    if (event.target.value === "none") {
+      deleteBookOnShelf(bookId);
+    } else {
+      await updateBookData(bookId, event.target.value);
+    }
   };
 
   render() {
