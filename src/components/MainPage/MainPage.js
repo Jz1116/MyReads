@@ -25,7 +25,7 @@ class MainPage extends Component {
   };
 
   render() {
-    const { booksOnShelf, updateBookData } = this.props;
+    const { booksOnShelf, updateBookData, deleteBookOnShelf } = this.props;
 
     const { currentlyReading, wantToRead, read } = this.getBooksOnShelves(
       booksOnShelf
@@ -41,12 +41,18 @@ class MainPage extends Component {
             <CurrentReading
               currentlyReading={currentlyReading}
               updateBookData={updateBookData}
+              deleteBookOnShelf={deleteBookOnShelf}
             />
             <WantToRead
               wantToRead={wantToRead}
               updateBookData={updateBookData}
+              deleteBookOnShelf={deleteBookOnShelf}
             />
-            <Read read={read} updateBookData={updateBookData} />
+            <Read
+              read={read}
+              updateBookData={updateBookData}
+              deleteBookOnShelf={deleteBookOnShelf}
+            />
           </div>
         </div>
         <div className="open-search">

@@ -32,7 +32,7 @@ class BooksApp extends React.Component {
   }
 
   updateBookData = async (id, shelf) => {
-    await BooksAPI.update(id, shelf);
+    await BooksAPI.update({ id }, shelf);
     const { booksOnShelf } = this.state;
 
     booksOnShelf.forEach((book) => {
@@ -40,6 +40,19 @@ class BooksApp extends React.Component {
         book.shelf = shelf;
       }
     });
+
+    this.setState({
+      booksOnShelf,
+    });
+  };
+
+  deleteBookOnShelf = async (id) => {
+    const { booksOnShelf } = this.state;
+
+    await BooksAPI.update({ id }, "none");
+
+    const deleteIndex = booksOnShelf.findIndex((book) => book.id === id);
+    booksOnShelf.splice(deleteIndex, 1);
 
     this.setState({
       booksOnShelf,
@@ -59,6 +72,7 @@ class BooksApp extends React.Component {
             <MainPage
               booksOnShelf={booksOnShelf}
               updateBookData={this.updateBookData}
+              deleteBookOnShelf={this.deleteBookOnShelf}
             />
           </Route>
         </Switch>
